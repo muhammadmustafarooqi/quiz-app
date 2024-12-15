@@ -17,6 +17,43 @@
             min-height: 100vh;
             overflow-x: hidden;
         }
+         /* Countdown Timer Container */
+    .timer-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        width: 100px;
+        margin: 20px auto;
+        border: 3px solid #fff;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Countdown Timer Text */
+    #countdown {
+        font-size: 2rem;
+        color: #fff;
+        font-weight: 700;
+        margin: 0;
+        text-align: center;
+        animation: pulse 1s infinite ease-in-out;
+    }
+    
+    /* Pulse Animation */
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+    
 
         .quiz-container {
             background: rgba(255, 255, 255, 0.1);
@@ -129,6 +166,9 @@
 <body>
 
     <div class="quiz-container">
+        <div id="timer-container">
+            <div id="countdown">30</div>
+        </div>
         <h1>CSS Quiz</h1>
         <div class="question" id="question">Question goes here</div>
         <div class="options" id="options">
@@ -142,6 +182,16 @@
 
     
     <script>
+         var sec = 30;
+
+setInterval(function () {
+    countdown.innerHTML = `${sec}`;
+    sec--;
+    if (sec < 0) {
+        nextQuestion(); 
+        sec = 30; 
+    }
+}, 1000);
         const questions = [
             {
                 question: "What does CSS stand for?",
