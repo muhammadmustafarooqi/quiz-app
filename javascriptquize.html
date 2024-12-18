@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Quiz</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+ /* Countdown Timer Container */
+ .timer-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        width: 100px;
+        margin: 20px auto;
+        border: 3px solid #fff;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Countdown Timer Text */
+    #countdown {
+        font-size: 2rem;
+        color: #fff;
+        font-weight: 700;
+        margin: 0;
+        text-align: center;
+        animation: pulse 1s infinite ease-in-out;
+    }
+    
+    /* Pulse Animation */
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+    
+        .quiz-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .quiz-container h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .question {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            color: #fff;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-option {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 20px;
+            font-size: 1rem;
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-option:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .btn-next {
+            margin-top: 20px;
+            padding: 12px 20px;
+            background: linear-gradient(90deg, #6e8efb, #a777e3);
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .btn-next:hover {
+            background: linear-gradient(90deg, #a777e3, #6e8efb);
+            transform: scale(1.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .quiz-container {
+                padding: 20px;
+            }
+
+            .question {
+                font-size: 1.3rem;
+            }
+
+            .btn-option {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+
+            .btn-next {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .quiz-container {
+                padding: 15px;
+            }
+
+            .question {
+                font-size: 1.1rem;
+            }
+
+            .btn-option {
+                font-size: 0.8rem;
+                padding: 8px 16px;
+            }
+
+            .btn-next {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <div id="timer-container">
+            <div id="countdown">30</div>
+        </div>
+        <h1>JavaScript Quiz</h1>
+        <div class="question" id="question">Question goes here</div>
+        <div class="options" id="options">
+            <button class="btn-option">Option 1</button>
+            <button class="btn-option">Option 2</button>
+            <button class="btn-option">Option 3</button>
+            <button class="btn-option">Option 4</button>
+        </div>
+        <button class="btn-next" id="next-btn">Next Question</button>
+    </div>
+
+    
+    <script>
+         var sec = 30;
+
+setInterval(function () {
+    countdown.innerHTML = `${sec}`;
+    sec--;
+    if (sec < 0) {
+        nextQuestion(); 
+        sec = 30; 
+    }
+}, 1000);
+        const questions = [
+            {
+                question: "What does JavaScript stand for?",
+                answers: [
+                    {text: "Just a Simple Tool", correct: false},
+                    {text: "JavaScript Object Syntax", correct: false},
+                    {text: "JavaScript", correct: true},
+                    {text: "Just Some Text", correct: false},
+                ]
+            },
+            {
+                question: "Which of these is not a JavaScript data type?",
+                answers: [
+                    {text: "String", correct: false},
+                    {text: "Object", correct: false},
+                    {text: "Boolean", correct: false},
+                    {text: "Character", correct: true},
+                ]
+            },
+            {
+                question: "Which method is used to write text in the console?",
+                answers: [
+                    {text: "log()", correct: true},
+                    {text: "print()", correct: false},
+                    {text: "write()", correct: false},
+                    {text: "echo()", correct: false},
+                ]
+            },
+            {
+                question: "What is the result of 5 + '5' in JavaScript?",
+                answers: [
+                    {text: "55", correct: true},
+                    {text: "10", correct: false},
+                    {text: "Error", correct: false},
+                    {text: "NaN", correct: false},
+                ]
+            },
+            {
+                question: "Which method is used to parse a JSON string in JavaScript?",
+                answers: [
+                    {text: "JSON.parse()", correct: true},
+                    {text: "JSON.stringify()", correct: false},
+                    {text: "JSON.decode()", correct: false},
+                    {text: "JSON.toObject()", correct: false},
+                ]
+            }
+        ];
+        
+        let currentQuestionIndex = 0;
+        let score = 0;
+        
+        const questionElement = document.getElementById("question");
+        const optionsContainer = document.getElementById("options");
+        const nextButton = document.getElementById("next-btn");
+        
+        function showQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            questionElement.innerHTML = `${currentQuestionIndex + 1}. ${currentQuestion.question}`;
+            optionsContainer.innerHTML = '';
+        
+            currentQuestion.answers.forEach((answer) => {
+                const button = document.createElement("button");
+                button.classList.add("btn-option");
+                button.innerText = answer.text;
+        
+                button.onclick = () => {
+                    if (answer.correct) {
+                        score++;
+                    }
+                    nextButton.disabled = false;
+                };
+        
+                optionsContainer.appendChild(button);
+            });
+        
+            nextButton.disabled = true;
+        }
+        
+        function nextQuestion() {
+            currentQuestionIndex++;
+            sec = 30; 
+
+            if (currentQuestionIndex < questions.length) {
+                showQuestion();
+            } else {
+                Swal.fire({
+                    title: "Thank you",
+                    text: `Quiz Over! Your score: ${score} out of 5`,
+                    imageUrl: "https://unsplash.it/400/200",
+                    imageWidth: 400,
+                    imageHeight: 200,
+                    imageAlt: "Custom image"
+                });
+                currentQuestionIndex = 0;
+                score = 0;
+                showQuestion();
+                window.location.href = "./index.html";
+            }
+        }
+        
+        nextButton.addEventListener("click", nextQuestion);
+        
+        showQuestion();
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body> 
+</html>
